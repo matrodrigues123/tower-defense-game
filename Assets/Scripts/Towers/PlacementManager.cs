@@ -83,9 +83,27 @@ public class PlacementManager : MonoBehaviour
         isBuilding = false;
     }
 
-    public void Start()
+    private bool CanPlaceTowerAt(GridCell currCell)
     {
-        
+        if (currCell == null || !hoverCell.isWalkable
+            || currCell.gameObj.transform.position.y == 0
+            || currCell.gameObj.transform.position.y == MapGenerator.mapHeight - 1)
+        {
+            return false;
+        }
+
+        // check if there is atleast one other unblocked tile in the row
+        int cellRow = (int)currCell.gameObj.transform.position.y;
+        int cellCol = (int)currCell.gameObj.transform.position.x;
+        for (int col = 0; col < MapGenerator.mapWidth ; col++)
+        {
+            if (col != cellCol && MapGenerator.mapTiles[cellRow, col].isWalkable)
+            {
+                return true;
+            }
+        }
+
+        return false;
     }
     public void Update()
     {
@@ -94,9 +112,7 @@ public class PlacementManager : MonoBehaviour
             if (dummyPlacement != null)
             {
                 GetTilePosition();
-                if (hoverCell != null && hoverCell.isWalkable 
-                    && hoverCell.gameObj.transform.position.y != 0
-                    && hoverCell.gameObj.transform.position.y != MapGenerator.mapHeight - 1)
+                if (CanPlaceTowerAt(hoverCell))
                 {
                     dummyPlacement.transform.position = hoverCell.gameObj.transform.position;
 

@@ -102,6 +102,7 @@ MonoBehaviour:
   enemyHealth: 30
   killReward: 5
   damage: 20
+  flyer: 0
 --- !u!61 &8524771396863071811
 BoxCollider2D:
   m_ObjectHideFlags: 0

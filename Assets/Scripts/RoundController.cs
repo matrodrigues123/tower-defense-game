@@ -166,6 +166,10 @@ public class RoundController : MonoBehaviour
 
                     timeVar = Time.time + timeBetweenWaves;
                     round++;
+                    if (round % 3 == 0)
+                    {
+                        MoneyManager.AddMoney((round-1)*10);
+                    }
                     currRound.text = "Round: " + round;
                     ResetLevel();
                     return;

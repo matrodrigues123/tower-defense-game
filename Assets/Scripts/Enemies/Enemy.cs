@@ -56,10 +56,8 @@ public class Enemy : MonoBehaviour
         {
             
             // Find the path using A* algorithm (from current position to y = 0)
-            List<Vector2> path = FindPath(currPos, MapGenerator.mapTiles, MapGenerator.mapWidth, MapGenerator.mapHeight);
+            List<Vector2> path = FindPath(currPos, MapGenerator.mapTiles, MapGenerator.mapWidth, MapGenerator.mapHeight);;
             
-
-            // TODO: logic for the case when the path is not found
             foreach (Vector2 nextPos in path)
             {
                 GridCell nextCell = MapGenerator.mapTiles[(int)nextPos.y, (int)nextPos.x];
@@ -90,44 +88,11 @@ public class Enemy : MonoBehaviour
             }
         }
         
-        
-        // working version, non pathfinding
-        // while (gameObject != null)
-        // {
-        //     yield return new WaitForSeconds(1f);
-            
-        //     Vector2 nextPos = currPos - new Vector2(0,1);
-
-        //     if (nextPos.y >= 0)
-        //     {
-        //         GridCell nextCell = MapGenerator.mapTiles[(int)nextPos.y, (int)nextPos.x];
-        //         if (nextCell.isWalkable)
-        //         {
-        //             // update position
-        //             currPos = nextPos;
-
-        //             // update cell and make previous walkable
-        //             currCell.isWalkable = true;
-        //             currCell = nextCell;
-        //             currCell.isWalkable = false;
-
-        //             // change game obj position
-        //             transform.position = currPos;
-        //         }
-        //     }
-        //     if (currPos.y == 0)
-        //     {
-        //         PlayerHealth.DamagePlayer(damage);
-        //         DestroyEnemy();
-        //     }
-
-        // }
     }
 
     List<Vector2> FindPath(Vector2 start, GridCell[,] grid, int width, int height)
     {
         // Define the heuristic function
-        //TODO : change heuristic to consider horizontal distance (its making weird movements)
         int Heuristic(Vector2 a)
         {
             return (int)(Mathf.Abs(a.y));

@@ -1,14 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Tower : MonoBehaviour
 {
+    // tower stats
     [SerializeField] private float range;
     [SerializeField] public float damage;
     [SerializeField] private float timeBetweenShots;
     [SerializeField] public bool isVisibleToEnemy;
     [SerializeField] public int towerCost;
+
     private float nextTimeToShoot;
 
     public GameObject currentTarget;
